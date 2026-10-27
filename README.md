@@ -146,3 +146,21 @@ swift run CmdShelf
 - Palette 可搜索并复制命令，复制计数增长
 - SOP code blocks 可复制并写 usage 事件
 - Inbox 可抓取剪贴板并归档
+
+## 已打包应用与本地配置
+
+仓库提供 `dist/CmdShelf-macos-arm64.zip`，为 Apple Silicon（arm64）Mac 的 Release 构建，使用 ad-hoc 签名，未经过 Apple 公证。应用包从当前源码重新构建，不含原本写死的数据库密码。首次运行可能需要按 macOS 的安全提示确认。
+
+`.env.example` 保留原本的本机数据库连接参数（localhost:3306、root、cmdshelf），密码位置为占位符。复制后填写你自己的密码：
+
+```bash
+cp .env.example .env
+# 编辑 .env，填写本机数据库密码；该文件被 Git 忽略。
+set -a
+source .env
+set +a
+unzip dist/CmdShelf-macos-arm64.zip -d dist
+./dist/CmdShelf.app/Contents/MacOS/CmdShelf
+```
+
+编译缓存 `.build/`、Xcode 个人窗口状态和 `.DS_Store` 不上传。原始应用包包含旧的内置数据库配置，因此以重新构建的版本替代。

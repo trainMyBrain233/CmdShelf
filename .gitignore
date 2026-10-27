@@ -8,7 +8,9 @@ DerivedData/
 .netrc
 
 # Generated apps and local credentials
-/dist/
+/dist/*
+!/dist/CmdShelf-macos-arm64.zip
+!/dist/CmdShelf-macos-arm64.zip.sha256
 .env
 .env.*
 !.env.example
